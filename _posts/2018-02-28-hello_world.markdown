@@ -6,7 +6,7 @@ permalink:  hello_world
 ---
 
 
-##Why did you decide to learn software development?
+## Why did you decide to learn software development?
 
 `cout << "Hello, World"`
 
