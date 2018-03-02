@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Top 100 Films CLI App"
-date:       2018-03-01 19:52:42 +0000
+date:       2018-03-01 14:52:43 -0500
 permalink:  top_100_films_cli_app
 ---
 
@@ -40,7 +40,7 @@ The list is a good start, but it doesn't provide all the data I want for a film.
 ## The Bits
 Object Oriented programming requires thinking about specialization and responsibilities.  The film class holds information about the films. The CLI class interacts with the user. The scraper class retrieves the data.  Each method for each class is in charge of a specific type of action.
 
-I embraced the retro goodness of CLI by adding a title screen with ASCII art It was generated at [Patojk.com ](http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20). The [Colorize gem ](https://github.com/fazibear/colorize) was also used to change text color for special outputs.
+I embraced the retro goodness of CLI by adding a title screen with ASCII art It was generated at [Patorjk.com ](http://patorjk.com/software/taag/#p=display&f=Graffiti&t=Type%20Something%20). The [Colorize gem ](https://github.com/fazibear/colorize) was also used to change text color for special outputs.
 
 Scraping requires [Nokogiri](http://www.nokogiri.org) and [OpenURI](http://ruby-doc.org/stdlib-2.1.3/libdoc/open-uri/rdoc/OpenURI.html).  It can take a lot of tries to scrape down to the specific piece of information you need. The film title and year from the Empire list were used to generate a search link in IMDB that leads to the final film page. 
 
@@ -48,12 +48,12 @@ Scraping requires [Nokogiri](http://www.nokogiri.org) and [OpenURI](http://ruby-
 ## The Conclusion
 This gem is still a work in process and will go into review soon. You can take a peek at it on [GitHub](https://github.com/unenlightened/top-100-films-cli-app).
 
-It's fun building something from the ground up and figuring out to get all the bits and pieces working together.  Comments and critiques would be appreciated. They help the improvement process. Any movie recommendations would be welcome too.
+It was fun building something from the ground up and figuring out how to get all the bits and pieces working together.  Comments and critiques would be appreciated. They help the improvement process. Any movie recommendations would be welcome too.
 
 
 
 
-(Confession: I haven't seen the Godfather.)
+(Confession: I haven't seen the Godfather which was #1.)
 
 
 
