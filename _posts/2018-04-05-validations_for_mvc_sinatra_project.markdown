@@ -76,7 +76,7 @@ If an input is blank, it will be sent through the params as `""`. To validate da
 # Validation at Model Level
 Hmm, that's a lot to code for every required attribute. Is there a better way? ActiveRecord comes with built-in validation. This is another **server-side validation** that happens after data is submitted. It goes through the controller and into the model as a last line of defense.  Models can validate the data and also check it with the database.
 
-To use these just add the proper validations.
+To use these, just add the proper validations.
 
 **Before**
 ```
