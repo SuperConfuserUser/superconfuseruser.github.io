@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Rails Only Dynamic-ish Form Fields "
-date:       2018-06-26 07:58:12 +0000
+date:       2018-06-26 03:58:13 -0400
 permalink:  rails_only_dynamic-ish_form_fields
 ---
 
@@ -10,7 +10,7 @@ Dynamic form fields are generally built with JavaScript, but there's a way to fa
 
 ## Background
 
-This is something I experimented with while working the Learn Rails Portfolio Project. The project is [Travelogger](https://github.com/unenlightened/travelogger) where users can create trips with multiple locations. 
+This is something I experimented with while working on the Learn Rails Portfolio Project. The project is [Travelogger](https://github.com/unenlightened/travelogger) where users can create trips with multiple locations. 
 
 How many trips though? It could be anything. Something dynamic would be perfect where the use can choose. The Rails Guide has [this](http://guides.rubyonrails.org/form_helpers.html#adding-fields-on-the-fly) to say on the matter.
 
@@ -48,13 +48,13 @@ A new trip for "/trips/new" route.
 
 ```
 class TripsController
-	def new
-		@trip = Trip.new
-	end
+ def new
+  @trip = Trip.new
+ end
 end
 ```
 
-The create route gets a little more interesting.  
+The create action gets a little more interesting.  
 * Define a private method for `trip_params` allowing `:name`.
 * In the create action, make a new trip with `trip_params` submitted from the form.
 *  If the trip is invalid and can't save, render the form again.
