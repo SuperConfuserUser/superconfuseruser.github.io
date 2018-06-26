@@ -104,6 +104,8 @@ Add this to the Trip model.
 * `reject_if` will validate the submission. In this case, none of the fields can be blank.
 
 ```
+#Trip Model
+
 accepts_nested_attributes_for :locations, :allow_destroy => true, reject_if: :all_blank
 ```
 
@@ -188,7 +190,7 @@ end
 
 The create action will check if a Location is added and build a new one. We should now get a new Location field! 
 
-By using an OR statement,  `added_location?` is checked first. If true, it moves straight to the following block and bypasses the `!@trip.save` skipping validations like we want it to.
+By using an OR conditional,  `added_location?` is checked first. If true, it moves straight to the following block and bypasses the `!@trip.save` skipping validations like we want it to.
 
 ```
 #TripsController
@@ -214,7 +216,7 @@ You'll only be able to have two *blank* fields at most from the two `@trip.locat
 
 It'd be annoying to fill-in, click, fill-in, click. I want click, click, click. What's going on? 
 
-It's that `reject_if` validation in the Trip model's `accepts_nested_attributes_for`. It was perfect for a standard validation. Now, it's pesky when we want more custom behavior. Nested attributes seem to run whenever the Trip object is touched (from `@trip.location.build`) even we're not at an official validation stage.
+It's that `reject_if` validation in the Trip model's `accepts_nested_attributes_for`. It was perfect for a standard validation. Now, it's pesky when we want more custom behavior. Nested attributes seem to run whenever the Trip object is touched even we're not at an official validation stage like `@trip.location.build`.
 
 Remove the validation.
 ```
