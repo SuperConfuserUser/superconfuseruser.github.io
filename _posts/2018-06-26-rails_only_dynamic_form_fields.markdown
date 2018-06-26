@@ -14,7 +14,7 @@ This is something I experimented with while working the Learn Rails Portfolio Pr
 
 How many trips though? It could be anything. Something dynamic would be perfect where the use can choose. The Rails Guide has [this](http://guides.rubyonrails.org/form_helpers.html#adding-fields-on-the-fly) to say on the matter.
 
-So we're on our own! A happy accident caused interesting behavior (i. e. an error) during development.  I just pushed it further to see if it was possible. This is a pared down version with the important bits.
+So we're on our own! A happy accident caused interesting behavior (i. e. an error) during development.  I just pushed it further to see what was possible. This is a pared down version with the important bits.
 
 ## Basic MVC
 The trips and locations tables have a name attribute.
