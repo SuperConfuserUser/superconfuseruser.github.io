@@ -62,21 +62,21 @@ The create action gets a little more interesting.
 
 ```
 class TripsController
-	def create
-		@trip = Trip.new(trip_params)
+ def create
+  @trip = Trip.new(trip_params)
 
-		if !@trip.save
-			render :new
-		else
-			redirect_to trip_path(@trip) 
-		end
-	end
+  if !@trip.save
+   render :new
+  else
+   redirect_to trip_path(@trip) 
+  end
+ end
 		
 private
 
-	def trip_params
-		params.require(:trip).permit(:name)
-	end
+ def trip_params
+  params.require(:trip).permit(:name)
+ end
 end
 ```
 ### View
@@ -88,11 +88,11 @@ Create a form for the @trip object. Rails magic will know that this should be su
 
 <h1>New Trip</h1>
 
-	<%= form_for @trip do |f| %>
-		<%= f.text_field :name, placeholder: "Name" %>
+<%= form_for @trip do |f| %>
+ <%= f.text_field :name, placeholder: "Name" %>
 
-		<%= f.submit form_submit_text(trip) %>
-	<% end %>
+ <%= f.submit form_submit_text(trip) %>
+<% end %>
 ```
 
 ##  Nested Form
@@ -116,20 +116,20 @@ Create the associated Location with build in the controller.
 #TripsController
 
 def new
-    @trip = Trip.new(user_id: user_id, start_date: Date.today)
-    @trip.locations.build
-  end
+ @trip = Trip.new(user_id: user_id, start_date: Date.today)
+ @trip.locations.build
+end
 
-  def create
-    @trip = Trip.new(trip_params)
+def create
+ @trip = Trip.new(trip_params)
 
-	if !@trip.save
-		@trip.locations.build if @trip.locations.none?
-		render :new
-	else
-		redirect_to trip_path(@trip) 
-	end
-  end
+ if !@trip.save
+  @trip.locations.build if @trip.locations.none?
+  render :new
+ else
+  redirect_to trip_path(@trip) 
+ end
+end
 ```
 
 Update the trip_params to accept Location_attributes.
@@ -140,9 +140,9 @@ Update the trip_params to accept Location_attributes.
 ```
 #TripsController
 
- def trip_params
-    params.require(:trip).permit(:name, locations_attributes: [:id, :name, :_destroy])
-  end
+def trip_params
+ params.require(:trip).permit(:name, locations_attributes: [:id, :name, :_destroy])
+end
 ```
 
 Add the nested form to the Trip form with fields_for.
@@ -150,15 +150,14 @@ Add the nested form to the Trip form with fields_for.
 ```
 <!-- /trips/new.html.erb -->
 
-<
 <%= form_for @trip do |f| %>
-	<%= f.text_field :name, placeholder: "Name" %>
+ <%= f.text_field :name, placeholder: "Name" %>
 	
-	<%= f.fields_for :locations do |location_form| %>
-        <%= location_form.text_field :name, placeholder: "Location" %>
-    <% end %>
+ <%= f.fields_for :locations do |location_form| %>
+  <%= location_form.text_field :name, placeholder: "Location" %>
+ <% end %>
 
-	<%= f.submit form_submit_text(trip) %>
+ <%= f.submit form_submit_text(trip) %>
 <% end %>
 ```
 
@@ -172,8 +171,7 @@ Add a new submit button to the form. I just put it right after the location text
 ```
 <!-- /trips/new.html.erb -->
 
- <%= f.submit "+" %>
- 
+<%= f.submit "+" %>
 ```
 
 Tell your controller to do something about the new input. I defined a new method to make it more readable. Submit buttons are read in params as `:commit`.
@@ -184,9 +182,8 @@ Tell your controller to do something about the new input. I defined a new method
 private
 
 def added_location?
-	params[:commit] == "+"
-end
-	
+ params[:commit] == "+"
+end	
 ```
 
 The create action will check if a Location is added and build a new one. We should now get a new Location field! 
@@ -197,17 +194,17 @@ By using an OR statement,  `added_location?` is checked first. If true, it moves
 #TripsController
 
 def create
-	@trip = Trip.new(trip_params)
+ @trip = Trip.new(trip_params)
 
-	if added_location? || !@trip.save
-		@trip.locations.build if @trip.locations.none?
-		@trip.locations.build if added_location?
-		render :new
+  if added_location? || !@trip.save
+	 @trip.locations.build if @trip.locations.none?
+	 @trip.locations.build if added_location?
+	 render :new
 	else
-		redirect_to trip_path(@trip) 
+	 redirect_to trip_path(@trip) 
 	end
 end
-	```
+```
 
 ## Going Further
 
@@ -219,6 +216,8 @@ What's going on? It's that `reject_if` validation in the Trip model's `accepts_n
 
 Remove the validation.
 ```
+#Trip Model
+
 accepts_nested_attributes_for :locations, :allow_destroy => true
 ```
 
@@ -228,17 +227,17 @@ Also, remove `@trip.locations.build if @trip.locations.none?` from create. The o
 # TripsController
 
 def create
-	@trip = Trip.new(trip_params)
-
-	if added_location? || !@trip.save
-		@trip.locations.build if @trip.locations.none?
-		@trip.locations.build if added_location?
-		render :new
-	else
-		redirect_to trip_path(@trip) 
-	end
+ @trip = Trip.new(trip_params)
+ 
+ if added_location? || !@trip.save
+   @trip.locations.build if @trip.locations.none?
+	 @trip.locations.build if added_location?
+	 render :new
+ else
+  redirect_to trip_path(@trip) 
+ end
 end
-	```
+```
 
 So this will allow you to add as many blank fields as your heart desires. But now, there are bunch of blank Locations associated with the Trip. Oof.
 
@@ -251,19 +250,19 @@ Define custom validations in the Trip model. We want to have a bunch of blank fi
 
 before_save :reject_blank_locations!
 
-
 def reject_blank_locations!
-    locations.each do |location|
-      location.destroy if location.name.blank?
-    end
+ locations.each do |location|
+  location.destroy if location.name.blank?
+ end
 end
-
 ```
 
 ## Extra Credit
 You can use `validates :locations, presence: true` in the Trip model to make sure that it has a Location. But this won't work in conjunction with `:allow_destroy => true`.
 
 ```
+# Trip Model
+
 accepts_nested_attributes_for :locations, :allow_destroy => true, reject_if: :all_blank
 ```
 
