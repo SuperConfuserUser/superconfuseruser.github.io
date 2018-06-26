@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Rails Only "Dynamic" Form Fields "
-date:       2018-06-26 04:14:54 +0000
+date:       2018-06-26 00:14:55 -0400
 permalink:  rails_only_dynamic_form_fields
 ---
 
@@ -51,7 +51,7 @@ The create route gets a little more interesting.  Define a private method for tr
 ```
 class TripsController
 	def create
-		@trip = Trip.new(trip_params)            
+		@trip = Trip.new(trip_params) 
 
 		if !@trip.save
 			render :new
