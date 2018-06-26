@@ -1,6 +1,6 @@
 ---
 layout: post
-title:      "Rails Only "Dynamic" Form Fields "
+title:      "Rails Only Dynamic-ish Form Fields "
 date:       2018-06-26 00:14:55 -0400
 permalink:  rails_only_dynamic_form_fields
 ---
@@ -270,12 +270,16 @@ accepts_nested_attributes_for :locations, :allow_destroy => true, reject_if: :al
 Either remove the attribute oooooor create a custom validation.
 
 ## Conclusion
-When you click on the "+" submit button, the page does send a new http request. So it's not *truly* dynamic. The behavior and speed of refresh is very quick and seamless. It *feels* dynamic.
+When you click on the "+" submit button, the page does send a new http request. So it's not *truly* (client-side) dynamic. The behavior and speed of refresh is very quick and seamless. It *feels* dynamic.
 
 The simple solution would have been to use JavaScript. But working this out allowed me learn so much more about validations, design patterns, and the process of building a custom solution. 
 
 
-![](http://drive.google.com/file/d/1AfYyPT8T02u1q1drECtPYMzdDzyvtsRz/previewhttp://)
+## Location, Location, Location
+
+![](https://lh3.googleusercontent.com/WzyeBnusHLeu3-ma2oH6VRZFqEPwCnFLQvf2n-CANaIh5VxCpwL0P8AbjhU=w2400)
+
+
 
 
 
