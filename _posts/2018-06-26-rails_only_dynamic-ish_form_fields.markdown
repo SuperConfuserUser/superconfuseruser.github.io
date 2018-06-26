@@ -268,7 +268,7 @@ You can use `validates :locations, presence: true` in the Trip model to make sur
 accepts_nested_attributes_for :locations, :allow_destroy => true, reject_if: :all_blank
 ```
 
-Either remove the attribute *or* create a custom validation (<----).
+Either remove the attribute *or* create a custom validation &#10004;.
 
 ## Conclusion
 When you click on the "+" submit button, the page does send a new http request. So it's not *truly* dynamic (client-side). The behavior and speed of refresh is very quick and seamless. It *feels* dynamic.
