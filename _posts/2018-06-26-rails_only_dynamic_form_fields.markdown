@@ -110,7 +110,7 @@ class TripUserSerializer < ActiveModel::Serializer
 end
 ```
 
-Another way is to create the new function the serializer itself.
+Another way is to create the new function in the serializer itself.
 
 ```
 # Trip User Serializer
