@@ -8,8 +8,13 @@ permalink:  rails_only_dynamic_form_fields
 You can add more than just ActiveRecord model attributes created in the database schema and associated models to the Rails active model serializer.
 
 ## Background
+The [Travelogger](https://github.com/unenlightened/travelogger/blob/javascript-front-end/app/assets/javascripts/trips.js) site keeps track of trips. Users have many trips. And a trip belongs to a user.
+
 The project uses a Rails backend API to send JSON data to the JavaScript frontend. You can serialize Rails data into a JSON format very easily with [Active Model Serializer](https://github.com/rails-api/active_model_serializers).
 
+I want an individual trip to know it's user's total trip count. One method is to add the user and all of their trips to the single trip's API data and have JavaScript count them. But that's total overkill...
+
+Custom API data can be created on the Rails side instead and then sent to JavaScript. Much nicer.
 ## Requirements
 
 1. Set up the Rails general backend, especially models and associations.
@@ -114,8 +119,13 @@ class TripUserSerializer < ActiveModel::Serializer
   attributes :username, :trip_count
 	
   def trip_count
-  object.trips.count
+    object.trips.count
   end
 end
 ```
+
+And that's it! Super simple.
+
+## Conclusion
+This is a great way to control exactly what info each API serves and how it can be accessed. API calls are minimized and streamlined. 
 
