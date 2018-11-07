@@ -85,6 +85,7 @@ So how do we leverage the Materialize classes for style? SASS extend will let yo
 
 ```
 
+
 ### Extra
 In my final project, I used partials along with a mixin to create a materialize helper. `@extend framework-class` becomes `@include materialize(framework-class)` It's a little bit more writing, but now I know that those classes are specifically from Materialize.
 
@@ -96,6 +97,9 @@ In my final project, I used partials along with a mixin to create a materialize 
 }
 ```
 
+
 ### Conclusion
-You should be able to use this technique with any class-based framework. Most of the other popular CSS preprocessors have the same features, so any of those should be fine too. This mehod was shown with a very simple example but can be very useful throughout the entire app.
+You should be able to use this technique with any class-based CSS framework. Most of the other popular CSS preprocessors have the same features, so any of those should be fine too. 
+
+This mehod was shown with a very simple example but can be very useful throughout the entire app. Styling can be very DRY and is separated from the content.
 
