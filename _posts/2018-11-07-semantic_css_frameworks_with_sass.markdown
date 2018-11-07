@@ -1,7 +1,7 @@
 ---
 layout: post
 title:      "Semantic CSS Frameworks with SASS"
-date:       2018-11-07 21:48:40 +0000
+date:       2018-11-07 16:48:41 -0500
 permalink:  semantic_css_frameworks_with_sass
 ---
 
@@ -50,20 +50,20 @@ Let's change the original html to something like this. Now, there's only the con
       </ul>
 ```
 
-To target our new ul class, let's use nesting. This is really similar to the way your html is actually nested. Levels of nesting will be up to you. The h4 could be inside of the li, but I like to keep nesting shallow unless it makes sense to get more specific.
+To target our new ul class, let's use nesting. This is really similar to the way your html is actually nested. Levels of nesting will be up to you. I like to keep nesting shallow unless it makes sense to get more specific.
 
 ```
 \\ style.scss
 
 .first-names-list {
   
-  li {
+     li {
 
-  }
+     }
 	
-	li:nth-child(1) {
+     li:nth-child(1) {
 
-  }
+     }
 }
 
 ```
@@ -72,21 +72,29 @@ So how do we leverage the Materialize classes for style? SASS extend will let yo
 
 ```
 .first-names-list {
-  @extend collection, with-header;
+     @extend collection, with-header;
 	
-  li {
-	    @extend collection-item;
-  }
+     li {
+        @extend collection-item;
+     }
 	
-  li:nth-child(1) {
-	    @extend collection-header;
-  }
+     li:nth-child(1) {
+        @extend collection-header;
+     }
 }
 
 ```
 
 ### Extra
 In my final project, I used partials along with a mixin to create a materialize helper. `@extend framework-class` becomes `@include materialize(framework-class)` It's a little bit more writing, but now I know that those classes are specifically from Materialize.
+
+```
+@mixin materialize($classes...) {
+     @each $class in $classes {
+        @extend .#{$class};
+     }
+}
+```
 
 ### Conclusion
 You should be able to use this technique with any class-based framework. Most of the other popular CSS preprocessors have the same features, so any of those should be fine too. This mehod was shown with a very simple example but can be very useful throughout the entire app.
