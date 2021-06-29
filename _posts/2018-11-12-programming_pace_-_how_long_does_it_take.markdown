@@ -8,6 +8,8 @@ permalink:  programming_pace_-_how_long_does_it_take
 
 One of the most frequently asked questions for starting anything new is "How long does it take?" A good answer should always be "It depends."
 
+<!--more-->
+
 ## It Depends
 For programming, or the Flatiron program specifically, it depends on these factors:
 * What is your goal for the program? There are different ways of learning.

@@ -8,9 +8,11 @@ permalink:  hello_world
 
 ## Why did you decide to learn software development?
 
-`cout << "Hello, World"`
+{% highlight c++ %}
+cout << "Hello, World"
+{% endhighlight %}
 
-I still remember the rush from running that first line of code and seeing it actually work.  Then, I remember the fun of solving problems and making things.
+I still remember the rush from running that first line of code and seeing it actually work.  <!--more--> Then, I remember the fun of solving problems and making things.
 
 
 ## Building

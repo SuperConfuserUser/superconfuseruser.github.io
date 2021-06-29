@@ -8,6 +8,8 @@ permalink:  campus_recruiting_event
 
 Flatiron offers alumni a chance to participate in recruiting events. Employee relationship specialists gather employers who are interested in hiring entry-level developers. I was lucky enough to be part of Houston's very first one.
 
+<!--more-->
+
 The event seriously exceeded expectations. I wasn’t sure how many connections Flatiron had in Houston since it’s a new campus. There was a good variety of all sorts of companies. Houston has many more opportunities than I imagined.
 
 We got to meet directly with some very high-level personnel. I was not expecting that at all for entry-level positions. All the interviewers were very kind and really cared about what sort of person you are personality-wise and potential-wise. The notes about each interviewer were super helpful and prepared me for each one.

@@ -8,6 +8,8 @@ permalink:  top_100_films_cli_app
 
 The very first portfolio project for Flatiron students is an application with a Command Line Interface (CLI) that uses data from an external source.  It a great final project testing your understanding of all the previous lessons.
 
+<!--more-->
+
 The objectives are to implement the following:
 * Project setup
 * GitHub
@@ -28,7 +30,8 @@ NOW, we can code!
 
 ## The Project
 
-![](https://lh3.googleusercontent.com/E8J2W1jcNmEIs2jRO2o-wjDtZdqDV_g6kWyDjiGhk5uPMTtwk1qFwkkAaT9bY9g8cdrSJVX8LfFZwq5VblaWA9KvLaJ2UCmeLQZPlp0ac6MxjBs0EgF-i0fozJVI_4_ZU0pgsfV2Qg=w2400)
+  
+![Top 100 Films]({{ site.baseurl }}/img/posts/title-screen.png)
 
 My pop culture knowledge is pretty weak pre-1999. Friends are horrified to find out that I haven't seen classics such as Pulp Fiction (it's on my Netflix queue).  So this project will help with adding more films to the queue and practicing coding skills.
 
@@ -46,7 +49,7 @@ Gathering the data requires [Nokogiri](http://www.nokogiri.org) and [OpenURI](ht
 
 
 ## The Conclusion
-This gem is still a work in process and will go into review soon. You can take a peek at it on [GitHub](https://github.com/unenlightened/top-100-films-cli-app).
+This gem is still a work in process and will go into review soon. You can take a peek at it on [GitHub](https://github.com/SuperConfuserUser/top-100-films-cli-app).
 
 It was fun building something from the ground up and figuring out how to get all the bits and pieces working together.  Comments and critiques would be appreciated. They help the improvement process. Any movie recommendations would be welcome too.
 

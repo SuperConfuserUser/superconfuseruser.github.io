@@ -8,6 +8,8 @@ permalink:  learning_languages
 
 Coding is a completely different language. Like any language, it will take time to learn. How are you supposed to learn it? Babies learn their first language through repetition and copying. It starts with just making sounds. Then, they start to understand the context and use the right words for the right things. Then, they can start talking in more complex ways with proper sentence structure.
 
+<!--more-->
+
 Code has many of the same elements. You need to understand the data types, keywords, and functions. How are those put together correctly with syntax? How do you create more complex behavior with logic? It's not super scary. The first program that many people write is the classic "Hello, World!" It's super simple but you'll learn what a string is and how to output it in your program of choice. It builds little by little from there.
 
 ## Which Language?

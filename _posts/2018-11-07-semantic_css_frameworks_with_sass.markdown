@@ -10,15 +10,17 @@ CSS frameworks are a quick and easy way to style your content. Basic styles and 
 
 I've shied away from them though because adding styling classes to your HTML elements isn't very semantic. A basic page can become littered with extra classes. 
 
-```
-     <ul class="collection with-header">
-        <li class="collection-header"><h4>First Names</h4></li>
-        <li class="collection-item">Alvin</li>
-        <li class="collection-item">Alvin</li>
-        <li class="collection-item">Alvin</li>
-        <li class="collection-item">Alvin</li>
-      </ul>
-```
+<!--more-->
+
+{% highlight css %}
+ <ul class="collection with-header">
+    <li class="collection-header"><h4>First Names</h4></li>
+    <li class="collection-item">Alvin</li>
+    <li class="collection-item">Alvin</li>
+    <li class="collection-item">Alvin</li>
+    <li class="collection-item">Alvin</li>
+  </ul>
+{% endhighlight %}
 
 Oof, almost everything is classed. This feels very redundant when the HTML tags should be enough for differentiation.
 
@@ -30,30 +32,30 @@ We'll be using few of the SASS features.
 ### Case Study
 A main style.scss sheet will hold our styling. Regular CSS can be used along with SASS specific things. Import the CSS framework of your choice with the proper path. Files don't need the .css or .scss extension. I'll be using Materialize CSS for this example.
 
-```
-\\ style.scss
+{% highlight css %}
+// style.scss
 
 
 @import '/path/to/materialize-css'
 
-```
+{% endhighlight %}
 
 Let's change the original html to something like this. Now, there's only the content, html tags, and one descriptive class.
 
-```
-     <ul class="first-names-list">
-        <li><h4>First Names</h4></li>
-        <li>Alvin</li>
-        <li>Alvin</li>
-        <li>Alvin</li>
-        <li>Alvin</li>
-      </ul>
-```
+{% highlight css %}
+ <ul class="first-names-list">
+    <li><h4>First Names</h4></li>
+    <li>Alvin</li>
+    <li>Alvin</li>
+    <li>Alvin</li>
+    <li>Alvin</li>
+  </ul>
+{% endhighlight %}
 
 To target our new ul class, let's use nesting. This is really similar to the way your html is actually nested. Levels of nesting will be up to you. I like to keep nesting shallow unless it makes sense to get more specific.
 
-```
-\\ style.scss
+{% highlight css %}
+// style.scss
 
 .first-names-list {
   
@@ -66,11 +68,11 @@ To target our new ul class, let's use nesting. This is really similar to the way
      }
 }
 
-```
+{% endhighlight %}
 
 So how do we leverage the Materialize classes for style? SASS extend will let you share CSS properties from one selector to another. We can use it to add Materialize to these selectors. It's taking the classes from the materialize-css file that was imported. You can extend more than one thing, and it could also be a custom class or extension. .first-names-list is extending two classes.
 
-```
+{% highlight css %}
 .first-names-list {
      @extend collection, with-header;
 	
@@ -83,23 +85,23 @@ So how do we leverage the Materialize classes for style? SASS extend will let yo
      }
 }
 
-```
+{% endhighlight %}
 
 
 ### Extra
 In my final project, I used partials along with a mixin to create a materialize helper. `@extend framework-class` becomes `@include materialize(framework-class)` It's a little bit more writing, but now I know that those classes are specifically from Materialize.
 
-```
+{% highlight css %}
 @mixin materialize($classes...) {
      @each $class in $classes {
         @extend .#{$class};
      }
 }
-```
+{% endhighlight %}
 
 
 ### Conclusion
 You should be able to use this technique with any class-based CSS framework. Most of the other popular CSS preprocessors have the same features, so any of those should be fine too. 
 
-This mehod was shown with a very simple example but can be very useful throughout the entire app. Styling can be very DRY and is separated from the content.
+This method was shown with a very simple example but can be very useful throughout the entire app. Styling can be very DRY and is separated from the content.
 
