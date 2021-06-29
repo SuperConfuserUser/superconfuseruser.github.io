@@ -1,6 +1,6 @@
 
 # The name of your website.
-name: Super Confuser User
+name: SuperConfuserUser
 
 description:
 
@@ -31,15 +31,15 @@ lang: en
 # FROM THIS POINT ON EVERYTHING IS OPTIONAL
 
 ##############
-# APPEREANCE #
+# APPEAREANCE #
 ##############
 
 # If you want to show the subtitle anywhere else than the front page, use
 # {% include subtitle.html %} to include it anywhere you want.
 show-subtitle: true
-display-social-icons: false
+display-social-icons: true
 
-footer-text: This is the footer.<br><a href="http://stijnvc.github.io/holo-alfa/">Holo Alfa</a> Jekyll theme crafted by <a href="http://stijnvc.github.io/holo-alfa/">Stijn</a>.
+footer-text: Copyright © Chely Ho 2021
 
 # Preferably 64px in height. Leave empty = disable.
 logo-image: # /img/logo.png
@@ -77,7 +77,7 @@ nav-breaking-point: 520px
 paginate: 3
 
 # Display links for the previous and next post on post pages.
-display-next-prev-post: false
+display-next-prev-post: true
 
 # Leave empty if you don't want comments on post pages.
 disqus-shortname:
@@ -98,8 +98,8 @@ google-plus:
 reddit:
 soundcloud:
 medium:
-linkedin:
-github:
+linkedin: https://www.linkedin.com/in/chelyho/
+github: https://github.com/SuperConfuserUser
 behance:
 codepen:
 dribbble:
