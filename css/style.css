@@ -342,7 +342,7 @@ footer {
   text-align: center;
   background-color: rgba({{ site.text-color }}, 0.05);
   border-top: 1px solid rgba({{ site.text-color }}, 0.1);
-  height: 140px;
+  height: 120px;
 }
 footer a {
   /*background-image: none;*/
@@ -404,7 +404,7 @@ nav a.current {
   background-image: linear-gradient(rgba({{ site.text-color }},.5),rgba({{ site.text-color }},.5));
 }
 .inner p {
-  margin: 30px 0 0 0;
+  margin: 30px 0 15px 0;
 }
 .inner .subtitle {
   margin: 10px 0 0 0;
