@@ -26,7 +26,7 @@
     {% if site.stack-overflow %}<a class="fa fa-stack-overflow" href="{{ site.stack-overflow }}" {% if site.social-icons-open-newtab %}target="_blank"{% endif %}></a>{% endif %}
     {% if site.bitcoin %}<a class="fa fa-bitcoin" href="{{ site.bitcoin }}" {% if site.social-icons-open-newtab %}target="_blank"{% endif %}></a>{% endif %}
     {% if site.paypal %}<a class="fa fa-paypal" href="{{ site.paypal }}" {% if site.social-icons-open-newtab %}target="_blank"{% endif %}></a>{% endif %}
-    {% if site.email %}<a class="fa fa-envelope" href="mailto:{{ site.email }}"></a>{% endif %}
+    {% if site.author.email %}<a class="fa fa-envelope" href="mailto:{{ site.author.email }}"></a>{% endif %}
   {% endif %}
   </p>
 </div>

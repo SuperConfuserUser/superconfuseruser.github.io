@@ -8,7 +8,7 @@ description:
   meta: SuperConfuserUser is Chely Ho's software development blog with a focus on lessons learned and the craft.
 
   # Description of your site. This will show up on the front page.
-  subtitle: Chely Ho's software development blog.
+  subtitle: SuperConfuserUser is Chely Ho's software development blog with a focus on lessons learned and the craft.
 
 author:
   name: Chely Ho # Change this!
@@ -36,10 +36,12 @@ lang: en
 
 # If you want to show the subtitle anywhere else than the front page, use
 # {% include subtitle.html %} to include it anywhere you want.
-show-subtitle: false
+show-subtitle: true
 display-social-icons: true
+# If you want social links to open in a new tab, set this as true
+social-icons-open-newtab: true
 
-footer-text: © Chely Ho 2019
+footer-text: © 2019 Chely Ho
 
 # Preferably 64px in height. Leave empty = disable.
 logo-image: /favicon-32x32.png # Original /img/logo.png
@@ -107,7 +109,6 @@ trello:
 stack-overflow:
 bitcoin:
 paypal:
-email: chelyho@gmail.com
 
 #####################
 # CUSTOMIZABLE TEXT #

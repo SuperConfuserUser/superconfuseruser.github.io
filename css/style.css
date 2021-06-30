@@ -371,10 +371,11 @@ footer .inner {
   align-items: center;
 }
 .site-logo {
-  background: url('{{ site.baseurl }}/favicon-32x32.png');
+  background: url('{{ site.baseurl }}/img/logo-sprite.png') 0 0 no-repeat;
 }
 .website-title:hover .site-logo {
-  background: url('{{ site.baseurl }}/img/favicon-32x32-smile.png');
+  /*background: url('{{ site.baseurl }}/img/favicon-32x32-smile.png');*/
+  background-position: -32px 0;
 }
 nav a {
   display: block;
