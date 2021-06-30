@@ -3,11 +3,11 @@
   {% if site.show-subtitle %}
     {{ site.description.subtitle }}
   {% endif %}
-  {% if site.display-social-icons %}
+  {% if site.display-social-icons and false %}
     {% if site.show-subtitle and site.display-social-icons %}
     <br>
     {% endif %}
-    {{ site.var_on_the_web }}:&nbsp;
+    {{ site.var_on_the_web }}{% if site.var_on_the_web %}:&nbsp;{% endif %}
     {% if site.twitter %}<a class="fa fa-twitter" href="{{ site.twitter }}" {% if site.social-icons-open-newtab %}target="_blank"{% endif %}></a>{% endif %}
     {% if site.youtube %}<a class="fa fa-youtube" href="{{ site.youtube }}" {% if site.social-icons-open-newtab %}target="_blank"{% endif %}></a>{% endif %}
     {% if site.instagram %}<a class="fa fa-instagram" href="{{ site.instagram }}" {% if site.social-icons-open-newtab %}target="_blank"{% endif %}></a>{% endif %}

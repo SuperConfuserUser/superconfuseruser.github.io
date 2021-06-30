@@ -5,10 +5,10 @@ name: SuperConfuserUser
 description:
 
   # Description of your site. This will show up in google.
-  meta: Holo Alfa is a minimalist, mobile first Jekyll theme with focus on readability and content.
+  meta: SuperConfuserUser is Chely Ho's software development blog with a focus on lessons learned and the craft.
 
   # Description of your site. This will show up on the front page.
-  subtitle: # Holo Alfa is a minimalist, mobile first Jekyll theme with focus on readability and content. <a href="https://github.com/stijnvc/holo-alfa">&lt;/&gt; on Github</a>.
+  subtitle: Chely Ho's software development blog.
 
 author:
   name: Chely Ho # Change this!
@@ -39,10 +39,10 @@ lang: en
 show-subtitle: false
 display-social-icons: true
 
-footer-text: Copyright © Chely Ho 2021
+footer-text: © Chely Ho 2019
 
 # Preferably 64px in height. Leave empty = disable.
-logo-image: # /img/logo.png
+logo-image: /favicon-32x32.png # Original /img/logo.png
 
 # Toolbar color for Chrome on Android.
 theme-color-attr: "#ffcc4d" # Original: "#00f0ff"
@@ -51,10 +51,10 @@ theme-color-attr: "#ffcc4d" # Original: "#00f0ff"
 ms-tile-color: "#ffcc4d" # Original: "#00f0ff"
 
 # Color used throughout the theme. Format: R, G, B.
-theme-color: 255, 202, 77 # Original: 0, 240, 255
+theme-color: 255, 204, 77 # Original: 0, 240, 255
 
 # Text color used throughout the theme. Format: R, G, B.
-text-color: 0, 0, 0 # Original: 0, 0, 0
+text-color: 0, 0, 0
 
 # Background color used throughout the theme. Format: R, G, B.
 # Note: if you change the background color AND you use cover images, you should
@@ -115,7 +115,7 @@ email: chelyho@gmail.com
 
 # Useful for translating into other languages.
 
-var_on_the_web: On the web
+var_on_the_web:
 var_read: Read # Text after each post summary on the homepage.
 var_newer: Newer
 var_older: Older

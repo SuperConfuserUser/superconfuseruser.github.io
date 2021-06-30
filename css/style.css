@@ -140,7 +140,7 @@ td, th {
   padding: .8rem
 }
 th {
-  background-color: rgba({{ site.text-color }}, 0.05);;
+  background-color: rgba({{ site.text-color }}, 0.05);
 }
 tr {
   border-bottom: 1px solid  rgba({{ site.text-color }}, 0.05);
@@ -257,9 +257,12 @@ header {
   position: relative;
   color: rgba({{ site.text-color }},.5);
 }
-header img {
+header img,
+.site-logo {
   height: 32px;
+  width: 32px;
   display: inline-block;
+  margin: 0 10px 0 0;
 }
 nav {
   margin: 20px 0;
@@ -275,7 +278,7 @@ header::after {
   font-size: 60px;
   display: block;
   text-align: center;
-  color: rgba({{ site.theme-color }}, 0.4);
+  color: rgba({{ site.theme-color }}, 0.6);
 }
 article:last-of-type::after {
   content: "";
@@ -342,9 +345,9 @@ footer {
   height: 140px;
 }
 footer a {
-  background-image: none;
-  text-decoration: none !important;
-  font-weight: 600;
+  /*background-image: none;*/
+  /*text-decoration: none !important;*/
+  /*font-weight: 600;*/
 }
 footer .inner {
   margin: 0 auto;
@@ -360,10 +363,18 @@ footer .inner {
   font-weight: 600;
   font-size: 24px;
   text-align: center;
-  display: block;
+  /*display: block;*/
   background-image: none;
   text-decoration: none !important;
   color: rgba({{ site.text-color }}, .76);
+  display: flex;
+  align-items: center;
+}
+.site-logo {
+  background: url('{{ site.baseurl }}/favicon-32x32.png');
+}
+.website-title:hover .site-logo {
+  background: url('{{ site.baseurl }}/img/favicon-32x32-smile.png');
 }
 nav a {
   display: block;
@@ -392,7 +403,12 @@ nav a.current {
   background-image: -ms-linear-gradient(rgba({{ site.text-color }},.5),rgba({{ site.text-color }},.5));
   background-image: linear-gradient(rgba({{ site.text-color }},.5),rgba({{ site.text-color }},.5));
 }
-
+.inner p {
+  margin: 30px 0 0 0;
+}
+.inner .subtitle {
+  margin: 10px 0 0 0;
+}
 
 /* Structure overwrites */
 

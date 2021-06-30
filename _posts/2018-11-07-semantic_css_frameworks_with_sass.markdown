@@ -32,7 +32,7 @@ We'll be using few of the SASS features.
 ### Case Study
 A main style.scss sheet will hold our styling. Regular CSS can be used along with SASS specific things. Import the CSS framework of your choice with the proper path. Files don't need the .css or .scss extension. I'll be using Materialize CSS for this example.
 
-{% highlight css %}
+{% highlight scss %}
 // style.scss
 
 
@@ -42,7 +42,7 @@ A main style.scss sheet will hold our styling. Regular CSS can be used along wit
 
 Let's change the original html to something like this. Now, there's only the content, html tags, and one descriptive class.
 
-{% highlight css %}
+{% highlight scss %}
  <ul class="first-names-list">
     <li><h4>First Names</h4></li>
     <li>Alvin</li>
@@ -54,7 +54,7 @@ Let's change the original html to something like this. Now, there's only the con
 
 To target our new ul class, let's use nesting. This is really similar to the way your html is actually nested. Levels of nesting will be up to you. I like to keep nesting shallow unless it makes sense to get more specific.
 
-{% highlight css %}
+{% highlight scss %}
 // style.scss
 
 .first-names-list {
@@ -72,7 +72,7 @@ To target our new ul class, let's use nesting. This is really similar to the way
 
 So how do we leverage the Materialize classes for style? SASS extend will let you share CSS properties from one selector to another. We can use it to add Materialize to these selectors. It's taking the classes from the materialize-css file that was imported. You can extend more than one thing, and it could also be a custom class or extension. .first-names-list is extending two classes.
 
-{% highlight css %}
+{% highlight scss %}
 .first-names-list {
      @extend collection, with-header;
 	
@@ -91,7 +91,7 @@ So how do we leverage the Materialize classes for style? SASS extend will let yo
 ### Extra
 In my final project, I used partials along with a mixin to create a materialize helper. `@extend framework-class` becomes `@include materialize(framework-class)` It's a little bit more writing, but now I know that those classes are specifically from Materialize.
 
-{% highlight css %}
+{% highlight scss %}
 @mixin materialize($classes...) {
      @each $class in $classes {
         @extend .#{$class};

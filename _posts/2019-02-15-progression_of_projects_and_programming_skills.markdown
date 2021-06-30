@@ -23,7 +23,7 @@ Stack: Ruby, Sinatra, SQL Database, HTML, CSS
 * Implemented user accounts with CRUD abilities
 * Created custom HTML and CSS to design forms
 
-[Github](https://github.com/SuperConfuserUser/ink-well-app){:target="_blank"}
+<small>[GitHub](https://github.com/SuperConfuserUser/ink-well-app){:target="_blank"}</small>
 
 [comment]: <> (, [Walkthrough]&#40;https://drive.google.com/open?id=14ev4uoJdcemG1b4uzwtxpOjDxCEJ0z-1&#41;)
 
@@ -41,7 +41,7 @@ Stack: Ruby, Rails, HTML, CSS, SQL Database, Omniauth
 * Customized form validation errors with ActiveRecord
 * Implemented Rails helpers, layouts, and partials for DRYer code
 
-[Github](https://github.com/SuperConfuserUser/travelogger){:target="_blank"}
+<small>[Github](https://github.com/SuperConfuserUser/travelogger){:target="_blank"}</small>
 
 [comment]: <> (, [Walkthrough]&#40;https://drive.google.com/open?id=1e26r9zMsey5JAzYmwKtd8QWPEUu-KMNq&#41;)
 
@@ -58,6 +58,6 @@ Stack: React, Redux, JavaScript, Ruby, Rails, SASS, Materialize CSS
 * Developed React, Redux routing,  and JavaScript frontend
 * Integrated SASS and Materialize CSS framework for style
 
-[Github](https://github.com/SuperConfuserUser/portfolio){:target="_blank"}
+<small>[Github](https://github.com/SuperConfuserUser/portfolio){:target="_blank"}</small>
 
 [comment]: <> (, [Walkthrough]&#40;https://drive.google.com/open?id=1tRc5LVgIbRReScfGMDBr6err9epZkU-&#41;)
