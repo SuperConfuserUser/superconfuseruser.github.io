@@ -1,0 +1,45 @@
+I"<p>The very first portfolio project for Flatiron students is an application with a Command Line Interface (CLI) that uses data from an external source.  It a great final project testing your understanding of all the previous lessons.</p>
+
+<p>The objectives are to implement the following:</p>
+<ul>
+  <li>Project setup</li>
+  <li>GitHub</li>
+  <li>Object Oriented Programming</li>
+  <li>CLI</li>
+  <li>Scraping</li>
+</ul>
+
+<h2 id="the-hurdles">The Hurdles</h2>
+<p>This will be the first time we’re asked to build an entire project from scratch.  I’ve been spoiled by the lessons which are all nicely setup and ready for code. The Learn IDE automates and simplifies a lot of tasks, so I don’t have to worry too much about connecting to GitHub or dependencies.</p>
+
+<p>Project setup is daunting when you’re just staring at an empty temp directory. Luckily, it’s <a href="http://bundler.io">Bundler</a> to the rescue. Creating a project directory with structure and support files is as easy as <code class="language-plaintext highlighter-rouge">bundle gem &lt;GEM_NAME&gt;</code>. Dependencies will also be easier to load with <code class="language-plaintext highlighter-rouge">bundle install</code>.</p>
+
+<p>GitHub was another big trouble spot. There were lessons about Git basics, but they were very early on and didn’t stick since we didn’t have to use the commands.  Re-reading those helped. Reading other <a href="https://product.hubspot.com/blog/git-and-github-tutorial-for-beginners">sources</a> helped. Using it constantly helped a lot. Now, I can clone remote repos and push local repos. Success!</p>
+
+<p>NOW, we can code!</p>
+
+<h2 id="the-project">The Project</h2>
+
+<p><img src="https://lh3.googleusercontent.com/E8J2W1jcNmEIs2jRO2o-wjDtZdqDV_g6kWyDjiGhk5uPMTtwk1qFwkkAaT9bY9g8cdrSJVX8LfFZwq5VblaWA9KvLaJ2UCmeLQZPlp0ac6MxjBs0EgF-i0fozJVI_4_ZU0pgsfV2Qg=w2400" alt="" /></p>
+
+<p>My pop culture knowledge is pretty weak pre-1999. Friends are horrified to find out that I haven’t seen classics such as Pulp Fiction (it’s on my Netflix queue).  So this project will help with adding more films to the queue and practicing coding skills.</p>
+
+<p>Empire online has a nice <a href="https://www.empireonline.com/movies/features/best-movies/">list</a> that was crowdsourced. Most are American. Some are very recent and popular and may not stand the test of time. The genre leans more towards action. There’s a sprinkling of classics, and all seem like very solid films.</p>
+
+<p>The list is a good start, but it doesn’t provide all the data I want for a film. For that, <a href="http://www.imdb.com">IMDB</a> is king.  Wikipedia doesn’t have as much multimedia, and Rotten Tomatoes doesn’t have anything for more obscure films.</p>
+
+<h2 id="the-bits">The Bits</h2>
+<p>Object Oriented programming requires thinking about specialization and responsibilities.  The film class holds information about the films. The CLI class interacts with the user. The scraper class retrieves the data.  Each method for each class is in charge of a specific type of action.</p>
+
+<p>I embraced the retro goodness of CLI by adding an ASCII art title screen generated at <a href="http://patorjk.com/software/taag/#p=display&amp;f=Graffiti&amp;t=Type%20Something%20">Patorjk.com</a>. The <a href="https://github.com/fazibear/colorize">Colorize gem</a> was also used to change text color for special outputs.</p>
+
+<p>Gathering the data requires <a href="http://www.nokogiri.org">Nokogiri</a> and <a href="http://ruby-doc.org/stdlib-2.1.3/libdoc/open-uri/rdoc/OpenURI.html">OpenURI</a>.  It can take a lot of tries to scrape down to the specific piece of information you need. The film title and year from the Empire list were used to generate a search link in IMDB that leads to the final page with film details.</p>
+
+<h2 id="the-conclusion">The Conclusion</h2>
+<p>This gem is still a work in process and will go into review soon. You can take a peek at it on <a href="https://github.com/unenlightened/top-100-films-cli-app">GitHub</a>.</p>
+
+<p>It was fun building something from the ground up and figuring out how to get all the bits and pieces working together.  Comments and critiques would be appreciated. They help the improvement process. Any movie recommendations would be welcome too.</p>
+
+<p>(Confession: I haven’t seen #1 - The Godfather.)</p>
+
+:ET

@@ -1,0 +1,270 @@
+I"�.<p>Dynamic form fields are generally built with JavaScript, but there’s a way to fake this in Rails. The page isn’t actually updated dynamically, but it <em>seems</em> dynamic.</p>
+
+<h2 id="background">Background</h2>
+
+<p>This is something I experimented with while working on the Learn Rails Portfolio Project. The project is <a href="https://github.com/unenlightened/travelogger">Travelogger</a> where users can create trips with multiple locations.</p>
+
+<p>How many trips though? It could be anything. Something dynamic would be perfect where the use can choose. The Rails Guide has <a href="http://guides.rubyonrails.org/form_helpers.html#adding-fields-on-the-fly">this</a> to say on the matter.</p>
+
+<p>So we’re on our own! A happy accident caused interesting behavior (i. e. an error) during development.  I just pushed it further to see what was possible. This is a pared down version with the important bits.</p>
+
+<h2 id="basic-mvc">Basic MVC</h2>
+<p>The trips and locations tables have a name attribute.</p>
+
+<h3 id="models">Models</h3>
+
+<p>The Trip model <code class="language-plaintext highlighter-rouge">has_many</code> Locations. Trip name is validated for presence.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#Trip Model
+
+class Trip 
+  has_many :locations
+  validates :name, presence: true
+end
+</code></pre></div></div>
+
+<p>Location <code class="language-plaintext highlighter-rouge">belongs_to</code> Trip.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#Location Model
+
+class Location 
+  belongs_to :trip
+end
+</code></pre></div></div>
+
+<h3 id="controller">Controller</h3>
+
+<p>A new trip for “/trips/new” route.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class TripsController
+ def new
+  @trip = Trip.new
+ end
+end
+</code></pre></div></div>
+
+<p>The create action gets a little more interesting.</p>
+<ul>
+  <li>Define a private method for <code class="language-plaintext highlighter-rouge">trip_params</code> allowing <code class="language-plaintext highlighter-rouge">:name</code>.</li>
+  <li>In the create action, make a new trip with <code class="language-plaintext highlighter-rouge">trip_params</code> submitted from the form.</li>
+  <li>If the trip is invalid and can’t save, render the form again.</li>
+  <li>Else, show the new trip.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class TripsController
+ def create
+  @trip = Trip.new(trip_params)
+
+  if !@trip.save
+   render :new
+  else
+   redirect_to trip_path(@trip) 
+  end
+ end
+		
+private
+
+ def trip_params
+  params.require(:trip).permit(:name)
+ end
+end
+</code></pre></div></div>
+<h3 id="view">View</h3>
+
+<p>Create a form for the @trip object. Rails magic will know that this should be submitted to the TripsController create action.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- /trips/new.html.erb --&gt;
+
+&lt;h1&gt;New Trip&lt;/h1&gt;
+
+&lt;%= form_for @trip do |f| %&gt;
+ &lt;%= f.text_field :name, placeholder: "Name" %&gt;
+
+ &lt;%= f.submit form_submit_text(trip) %&gt;
+&lt;% end %&gt;
+</code></pre></div></div>
+
+<h2 id="nested-form">Nested Form</h2>
+
+<p>Add this to the Trip model.</p>
+
+<ul>
+  <li>It allows you to create a Trip and its associated Locations in one form.</li>
+  <li>Associated objectes can be destroyed with <code class="language-plaintext highlighter-rouge">allow_destroy</code>.</li>
+  <li><code class="language-plaintext highlighter-rouge">reject_if</code> will validate the submission. In this case, none of the fields can be blank.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#Trip Model
+
+accepts_nested_attributes_for :locations, :allow_destroy =&gt; true, reject_if: :all_blank
+</code></pre></div></div>
+
+<p>Create the associated Location with build in the controller.</p>
+<ul>
+  <li>Build one in new.</li>
+  <li>When submitted, the validation will reject any that are blank.</li>
+  <li>If none were created, build another to populate the nested form.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#TripsController
+
+def new
+ @trip = Trip.new(user_id: user_id, start_date: Date.today)
+ @trip.locations.build
+end
+
+def create
+ @trip = Trip.new(trip_params)
+
+ if !@trip.save
+  @trip.locations.build if @trip.locations.none?
+  render :new
+ else
+  redirect_to trip_path(@trip) 
+ end
+end
+</code></pre></div></div>
+
+<p>Update the <code class="language-plaintext highlighter-rouge">trip_params</code> to accept <code class="language-plaintext highlighter-rouge">locations_attributes</code>.</p>
+<ul>
+  <li>Each will have their own id, since there can potentially be multiple.</li>
+  <li>Name is an attribute defined in the locations table.</li>
+  <li>Destroy will allow you to delete from Trip.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#TripsController
+
+def trip_params
+ params.require(:trip).permit(:name, locations_attributes: [:id, :name, :_destroy])
+end
+</code></pre></div></div>
+
+<p>Add the nested form to the Trip form with <code class="language-plaintext highlighter-rouge">fields_for</code>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- /trips/new.html.erb --&gt;
+
+&lt;%= form_for @trip do |f| %&gt;
+ &lt;%= f.text_field :name, placeholder: "Name" %&gt;
+	
+ &lt;%= f.fields_for :locations do |location_form| %&gt;
+  &lt;%= location_form.text_field :name, placeholder: "Location" %&gt;
+ &lt;% end %&gt;
+
+ &lt;%= f.submit form_submit_text(trip) %&gt;
+&lt;% end %&gt;
+</code></pre></div></div>
+
+<p>Okay, so that will let you create Locations along with Trip. Nested forms can be super powerful. More about them on the <a href="http://guides.rubyonrails.org/form_helpers.html#nested-forms">Rails Guide</a>.</p>
+
+<h2 id="fancy-stuff">Fancy Stuff</h2>
+<p>The order of this section will be reversed from previous examples.</p>
+
+<p>Add a new submit button to the form. I just put it right after the location text_field. Button label text can be anything like “Add Location”. The “+” makes it feel more like a button.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;!-- /trips/new.html.erb --&gt;
+
+&lt;%= f.submit "+" %&gt;
+</code></pre></div></div>
+
+<p>Tell your controller to do something about the new input. I defined a new method to make it more readable. Submit buttons are read in params as <code class="language-plaintext highlighter-rouge">:commit</code>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#TripsController
+
+private
+
+def added_location?
+ params[:commit] == "+"
+end	
+</code></pre></div></div>
+
+<p>The create action will check if a Location is added and build a new one. We should now get a new Location field!</p>
+
+<p>By using an OR conditional,  <code class="language-plaintext highlighter-rouge">added_location?</code> is checked first. If true, it moves straight to the following block and bypasses the <code class="language-plaintext highlighter-rouge">!@trip.save</code> skipping validations like we want it to.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#TripsController
+
+def create
+ @trip = Trip.new(trip_params)
+
+ if added_location? || !@trip.save
+  @trip.locations.build if @trip.locations.none?
+  @trip.locations.build if added_location?
+  render :new
+ else
+  redirect_to trip_path(@trip) 
+ end
+end
+</code></pre></div></div>
+
+<h2 id="going-further">Going Further</h2>
+
+<p>Great, so this actually works so far. It works really well if you want to add just two locations.</p>
+
+<p>You’ll only be able to have two <em>blank</em> fields at most from the two <code class="language-plaintext highlighter-rouge">@trip.locations.build</code> in the create action. The issue is when you want more. Blank Location fields have to be filled out before being able to add a new one.</p>
+
+<p>It’d be annoying to fill-in, click, fill-in, click. I want click, click, click. What’s going on?</p>
+
+<p>It’s that <code class="language-plaintext highlighter-rouge">reject_if</code> validation in the Trip model’s <code class="language-plaintext highlighter-rouge">accepts_nested_attributes_for</code>. It was perfect for a standard validation. Now, it’s pesky when we want more custom behavior. Nested attributes seem to run whenever the Trip object is touched even we’re not at an official validation stage like <code class="language-plaintext highlighter-rouge">@trip.location.build</code>.</p>
+
+<p>Remove the validation.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#Trip Model
+
+accepts_nested_attributes_for :locations, :allow_destroy =&gt; true
+</code></pre></div></div>
+
+<p>Also, remove <code class="language-plaintext highlighter-rouge">@trip.locations.build if @trip.locations.none?</code> from create. The one built in the new action will persist now.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># TripsController
+
+def create
+ @trip = Trip.new(trip_params)
+
+ if added_location? || !@trip.save
+  @trip.locations.build if @trip.locations.none?
+  @trip.locations.build if added_location?
+  render :new
+ else
+  redirect_to trip_path(@trip) 
+ end
+end
+</code></pre></div></div>
+
+<p>So this will allow you to add as many blank fields as your heart desires. But <em>now</em>, there are bunch of blank Locations saved with the Trip. Oof.</p>
+
+<p>Define custom validations in the Trip model. We want to have a bunch of blank fields but don’t need to save them. So the best time to do something about it would be right before save.</p>
+<ul>
+  <li>Use<code class="language-plaintext highlighter-rouge">'before_save</code> callback to run a custom method.</li>
+  <li><code class="language-plaintext highlighter-rouge">reject_blank_locations!</code> will check each of the Trip.locations and delete blank ones.</li>
+</ul>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#Trip Model
+
+before_save :reject_blank_locations!
+
+def reject_blank_locations!
+ locations.each do |location|
+  location.destroy if location.name.blank?
+ end
+end
+</code></pre></div></div>
+
+<h2 id="extra-credit">Extra Credit</h2>
+<p>You can use <code class="language-plaintext highlighter-rouge">validates :locations, presence: true</code> in the Trip model to make sure that it has a Location. But this won’t work in conjunction with <code class="language-plaintext highlighter-rouge">:allow_destroy =&gt; true</code>.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Trip Model
+
+accepts_nested_attributes_for :locations, :allow_destroy =&gt; true, reject_if: :all_blank
+</code></pre></div></div>
+
+<p>Either remove the attribute <em>or</em> create a custom validation ✔.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>When you click on the “+” submit button, the page does send a new http request. So it’s not <em>truly</em> dynamic (client-side). The behavior and speed of refresh is very quick and seamless. It <em>feels</em> dynamic.</p>
+
+<p>The simple solution would have been to use JavaScript. But working this out allowed me learn so much more about validations, design patterns, and the process of building a custom solution.</p>
+
+<h2 id="location-location-location">Location, Location, Location</h2>
+
+<p><img src="https://lh3.googleusercontent.com/WzyeBnusHLeu3-ma2oH6VRZFqEPwCnFLQvf2n-CANaIh5VxCpwL0P8AbjhU=w2400" alt="" /></p>
+
+:ET

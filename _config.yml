@@ -1,15 +1,15 @@
 # Site settings
-title: 
+title: Super Confuser User
 header-img: img/home-bg.png
-email: adept_inept@yahoo.com
-copyright_name: unenlightened
+email: chelyho@gmail.com
+copyright_name: Chely Ho
 description: > # this means to ignore newlines until "baseurl:"
   
 baseurl: "" # the subpath of your site, e.g. /blog
 twitter_username: 
-github_username:  unenlightened
+github_username:  SuperConfuserUser
 learn_profile: unenlightened
-email_username: adept_inept@yahoo.com
+email_username: chelyho@gmail.com
 
 # Build settings
 markdown: kramdown

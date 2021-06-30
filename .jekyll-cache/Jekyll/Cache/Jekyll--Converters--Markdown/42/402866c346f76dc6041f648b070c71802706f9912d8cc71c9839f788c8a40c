@@ -1,0 +1,47 @@
+I"d	<p>The Flatiron coursework includes major portfolio projects at the end of each module. The projects show the progression of skills gained. Beginning projects are simpler using one language, but the complexity increases with each.</p>
+
+<h3 id="ink-well">Ink Well</h3>
+<p><img src="https://drive.google.com/uc?export=download&amp;id=10bj5CSjW5kG7UpDi48udqDs76CDBkT3k" alt="Inkwell Page" /></p>
+
+<p>Do you love being a little old fashioned? Your analog pens and inks collection, but digital.</p>
+
+<p>TECH: Ruby, Sinatra, SQL Database, HTML, CSS</p>
+
+<ul>
+  <li>Designed SQL Database schema and configured ActiveRecord associations</li>
+  <li>Implemented user accounts with CRUD abilities</li>
+  <li>Created custom HTML and CSS to design forms</li>
+</ul>
+
+<p><a href="https://github.com/unenlightened/portfolio">Github</a>, <a href="https://drive.google.com/open?id=14ev4uoJdcemG1b4uzwtxpOjDxCEJ0z-1">Walkthrough</a></p>
+
+<h3 id="travelogger">Travelogger</h3>
+<p><img src="https://drive.google.com/uc?export=download&amp;id=1mY9o6vhxZt0roPBqd7flCAsf0I3zBGol" alt="Travelogger" /></p>
+
+<p>A better way to keep track of your adventures in case the last place you went to didn’t have a magnet. Social site to share your journeys.</p>
+
+<p>TECH: Ruby, Rails, HTML, CSS, SQL Database, Omniauth</p>
+
+<ul>
+  <li>Authenticated users with Facebook login via Omniauth</li>
+  <li>Customized form validation errors with ActiveRecord</li>
+  <li>Implemented Rails helpers, layouts, and partials for DRYer code</li>
+</ul>
+
+<p><a href="https://github.com/unenlightened/travelogger">Github</a>, <a href="https://drive.google.com/open?id=1e26r9zMsey5JAzYmwKtd8QWPEUu-KMNq">Walkthrough</a></p>
+
+<h3 id="portfolio-site">Portfolio Site</h3>
+<p><img src="https://drive.google.com/uc?export=download&amp;id=1GRmcwVKPLoNLwqpZR9Fmt3jZMo4r0e_E" alt="Portfolio Site" /></p>
+
+<p>A personal portfolio with dynamic admin features and responsive layout.</p>
+
+<p>TECH: React, Redux, JavaScript, Ruby, Rails, SASS, Materialize CSS</p>
+
+<ul>
+  <li>Built Ruby on Rails API endpoint with Knock JWT authentication and Gmail SMTP</li>
+  <li>Developed React, Redux routing,  and JavaScript frontend</li>
+  <li>Integrated SASS and Materialize CSS framework for style</li>
+</ul>
+
+<p><a href="https://github.com/unenlightened/ink-well-app">Github</a>, <a href="https://drive.google.com/open?id=1tRc5LVgIbRReScfGMDBr6err9epZkU-">Walkthrough</a></p>
+:ET

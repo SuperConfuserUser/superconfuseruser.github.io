@@ -1,0 +1,107 @@
+I"><h1 id="overview">Overview</h1>
+<p>We will be discussing data validation Sinatra applications at these levels:</p>
+<ol>
+  <li>View</li>
+  <li>Controller</li>
+  <li>Model</li>
+</ol>
+
+<p>The technologies are:</p>
+<ol>
+  <li>HTML5</li>
+  <li>Sinatra</li>
+  <li>ActiveRecord</li>
+</ol>
+
+<h1 id="introduction">Introduction</h1>
+<p>For the second Flatiron portfolio project, we must build  an MVC (Model View Controller) application with Sinatra and ActiveRecord. Users should be able to CRUD (Create Read Update Delete) their own content. User input needs to be validated so that bad data isn’t added to the database.</p>
+
+<p>I built a database for pens and inks called Ink Well. The user can create a pen with the following attributes:</p>
+<ul>
+  <li>brand</li>
+  <li>model</li>
+  <li>type</li>
+  <li>description</li>
+  <li>notes</li>
+  <li>favorite</li>
+</ul>
+
+<p>Brand, model, and type will be required.</p>
+
+<h1 id="validation-at-view-level">Validation at View Level</h1>
+<p><strong>Client-side validation</strong> happens in the browser before the user submits data. It’s very user-friendly and gives instant feedback.</p>
+
+<p>HTML5 includes a new <code class="language-plaintext highlighter-rouge">required</code> attribute for inputs. All you have to do is add it to your input.</p>
+
+<p><strong>Before</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;label for="brand"&gt;Brand&lt;/label&gt;&lt;br&gt;
+&lt;input type="text" name="pen[brand]"&gt;
+</code></pre></div></div>
+
+<p><strong>After</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>&lt;label for="brand"&gt;Brand&lt;/label&gt;&lt;br&gt;
+&lt;input type="text" name="pen[brand]" required&gt;
+</code></pre></div></div>
+
+<p>The input will be invalid if there’s no selection or entry and the browser will send an error message. 
+<img src="https://lh3.googleusercontent.com/g-uwIDhMI87_yGuvnezdPaxlAPjx7TVkh--pCNRvGXJp0lyLuACRQp5fxo0=w2400" alt="" /></p>
+
+<p>For special input types like email and tel, it will be invalid if it doesn’t match the correct pattern.</p>
+
+<p><img src="https://lh3.googleusercontent.com/7e4aA5QqPhYsc1q_GNncuOHtXwPCLbMGA1cHfAC5op3nyg6JlZvLvGXke_I=w2400" alt="" /></p>
+
+<p>The error message styling is dependant on the browser. At this time, you <em>can’t</em> style them. You <em>can</em>  use the  :valid and :invalid CSS pseudo-classes to style input. Such as adding a red border to invalid inputs.</p>
+
+<p>Javascript can also be used for validation and is completely customizable.</p>
+
+<h1 id="validation-at-controller-level">Validation at Controller Level</h1>
+
+<p><strong>Server-side validation</strong> happens after the user submits data. It’s not as quick as client-side, but is a good secondary defense in case the browser doesn’t support HTML5 or turns off Javascript.</p>
+
+<p>If an input is blank, it will be sent through the params as <code class="language-plaintext highlighter-rouge">""</code>. To validate data with Sinatra, we just need to make sure the required attributes aren’t empty.</p>
+
+<p><strong>Long form</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>!params[pen][brand].empty? &amp;&amp; !params[pen][model].empty? &amp;&amp; !params[pen][type].empty? 
+</code></pre></div></div>
+
+<p><strong>Shorter form</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>![params[pen][brand], [params[pen][model], [params[pen][type]].any?(&amp;:empty?) 
+</code></pre></div></div>
+
+<h1 id="validation-at-model-level">Validation at Model Level</h1>
+<p>Hmm, that’s a lot to code for every required attribute. Is there a better way? ActiveRecord comes with built-in validation. This is another <strong>server-side validation</strong> that happens after data is submitted. It goes through the controller and into the model as a last line of defense.  Models can validate the data and also check it with the database.</p>
+
+<p>To use these, just add the proper validations.</p>
+
+<p><strong>Before</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Pen &lt; ActiveRecord::Base
+  belongs_to :user
+end
+</code></pre></div></div>
+
+<p><strong>After</strong></p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Pen &lt; ActiveRecord::Base
+  belongs_to :user
+
+  validates_presence_of :type, :brand, :model
+end
+</code></pre></div></div>
+
+<p>Validations are checked when the object is sent to the database at create, save, and update. It won’t persist to the database if it’s invalid. You can also use <code class="language-plaintext highlighter-rouge">valid?</code> to check it yourself.</p>
+
+<p>ActiveRecord validations are very customizeable. There are other pre-defined helpers including uniqueness and length. You can customize your requirements and even customize the error messages. Learn more <a href="http://guides.rubyonrails.org/active_record_validations.html#when-does-validation-happen-questionmark">here</a>.</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>class Pen &lt; ActiveRecord::Base
+  belongs_to :user
+
+  validates :type, presence: {message: "How dare you!"}
+  validates :brand, presence: {message: "Are you trying to break the database?!"}
+  validates :model, presence: {message: "Why??"}
+end
+</code></pre></div></div>
+
+<h1 id="summary">Summary</h1>
+<p>There are many methods for form validation at different levels of the application. Using a combination of both client-side and server-side validations would be the safest and most user-friendly.</p>
+
+<p>For Ink Well, I took advantage of the built-in validations.  So validation happens at the view and model levels.</p>
+
+:ET

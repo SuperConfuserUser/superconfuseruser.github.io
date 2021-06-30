@@ -1,0 +1,90 @@
+I"�<p>CSS frameworks are a quick and easy way to style your content. Basic styles and behaviors are taken care of, so you’re free to focus more on design and customization.</p>
+
+<p>I’ve shied away from them though because adding styling classes to your HTML elements isn’t very semantic. A basic page can become littered with extra classes.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     &lt;ul class="collection with-header"&gt;
+        &lt;li class="collection-header"&gt;&lt;h4&gt;First Names&lt;/h4&gt;&lt;/li&gt;
+        &lt;li class="collection-item"&gt;Alvin&lt;/li&gt;
+        &lt;li class="collection-item"&gt;Alvin&lt;/li&gt;
+        &lt;li class="collection-item"&gt;Alvin&lt;/li&gt;
+        &lt;li class="collection-item"&gt;Alvin&lt;/li&gt;
+      &lt;/ul&gt;
+</code></pre></div></div>
+
+<p>Oof, almost everything is classed. This feels very redundant when the HTML tags should be enough for differentiation.</p>
+
+<h2 id="sass-to-the-rescue">SASS to the Rescue</h2>
+<p>SASS is a CSS preprocessor that turns it’s SCSS into regular CSS as the end. SCSS has a bunch of features like variables, nesting, importing, and operators. I’ve barely explored all the ways that these can be used to write more efficient and modular styling.</p>
+
+<p>We’ll be using few of the SASS features.</p>
+
+<h3 id="case-study">Case Study</h3>
+<p>A main style.scss sheet will hold our styling. Regular CSS can be used along with SASS specific things. Import the CSS framework of your choice with the proper path. Files don’t need the .css or .scss extension. I’ll be using Materialize CSS for this example.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>\\ style.scss
+
+
+@import '/path/to/materialize-css'
+
+</code></pre></div></div>
+
+<p>Let’s change the original html to something like this. Now, there’s only the content, html tags, and one descriptive class.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     &lt;ul class="first-names-list"&gt;
+        &lt;li&gt;&lt;h4&gt;First Names&lt;/h4&gt;&lt;/li&gt;
+        &lt;li&gt;Alvin&lt;/li&gt;
+        &lt;li&gt;Alvin&lt;/li&gt;
+        &lt;li&gt;Alvin&lt;/li&gt;
+        &lt;li&gt;Alvin&lt;/li&gt;
+      &lt;/ul&gt;
+</code></pre></div></div>
+
+<p>To target our new ul class, let’s use nesting. This is really similar to the way your html is actually nested. Levels of nesting will be up to you. I like to keep nesting shallow unless it makes sense to get more specific.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>\\ style.scss
+
+.first-names-list {
+  
+     li {
+
+     }
+	
+     li:nth-child(1) {
+
+     }
+}
+
+</code></pre></div></div>
+
+<p>So how do we leverage the Materialize classes for style? SASS extend will let you share CSS properties from one selector to another. We can use it to add Materialize to these selectors. It’s taking the classes from the materialize-css file that was imported. You can extend more than one thing, and it could also be a custom class or extension. .first-names-list is extending two classes.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>.first-names-list {
+     @extend collection, with-header;
+	
+     li {
+        @extend collection-item;
+     }
+	
+     li:nth-child(1) {
+        @extend collection-header;
+     }
+}
+
+</code></pre></div></div>
+
+<h3 id="extra">Extra</h3>
+<p>In my final project, I used partials along with a mixin to create a materialize helper. <code class="language-plaintext highlighter-rouge">@extend framework-class</code> becomes <code class="language-plaintext highlighter-rouge">@include materialize(framework-class)</code> It’s a little bit more writing, but now I know that those classes are specifically from Materialize.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>@mixin materialize($classes...) {
+     @each $class in $classes {
+        @extend .#{$class};
+     }
+}
+</code></pre></div></div>
+
+<h3 id="conclusion">Conclusion</h3>
+<p>You should be able to use this technique with any class-based CSS framework. Most of the other popular CSS preprocessors have the same features, so any of those should be fine too.</p>
+
+<p>This mehod was shown with a very simple example but can be very useful throughout the entire app. Styling can be very DRY and is separated from the content.</p>
+
+:ET

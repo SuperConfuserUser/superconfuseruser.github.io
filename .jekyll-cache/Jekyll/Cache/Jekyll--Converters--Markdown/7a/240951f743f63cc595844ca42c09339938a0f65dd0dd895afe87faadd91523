@@ -1,0 +1,118 @@
+I"<p>You can add more than just ActiveRecord model attributes created in the database schema and associated models to the Rails active model serializer.</p>
+
+<h2 id="background">Background</h2>
+<p>The <a href="https://github.com/unenlightened/travelogger/blob/javascript-front-end/app/assets/javascripts/trips.js">Travelogger</a> site keeps track of trips. Users have many trips. And a trip belongs to a user.</p>
+
+<p>The project uses a Rails backend API to send JSON data to the JavaScript frontend. You can serialize Rails data into a JSON format very easily with <a href="https://github.com/rails-api/active_model_serializers">Active Model Serializer</a>.</p>
+
+<p>I want an individual trip to know it’s user’s total trip count. One method is to add the user and all of their trips to the single trip’s API data and have JavaScript count them. But that’s total overkill…</p>
+
+<p>Custom API data can be created on the Rails side instead and then sent to JavaScript. Much nicer.</p>
+<h2 id="requirements">Requirements</h2>
+
+<ol>
+  <li>Set up the Rails general backend, especially models and associations.</li>
+  <li>Add active_model_serializer gem.</li>
+  <li>Generate serializers.</li>
+  <li>Generate any explicit serializers.</li>
+</ol>
+
+<h2 id="very-basic-set-up">Very Basic Set Up</h2>
+<h3 id="schema">Schema</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>create_table "trips", force: :cascade do |t|
+    t.string "name"
+    t.integer "user_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_trips_on_user_id"
+end
+
+create_table "users", force: :cascade do |t|
+    t.string "username"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+end
+
+</code></pre></div></div>
+
+<h3 id="models">Models</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># User Model
+
+class User &lt; ApplicationRecord
+  has_many :trips
+end
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Trip Model
+
+class Trip &lt; ApplicationRecord
+  belongs_to :user
+end
+</code></pre></div></div>
+
+<h3 id="serializers">Serializers</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#Trip Serializer
+
+class TripSerializer &lt; ActiveModel::Serializer
+  attributes :id, :name, :user_id
+  belongs_to :user, serializer: TripUserSerializer
+end
+</code></pre></div></div>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>#UserSerializer
+class UserSerializer &lt; ActiveModel::Serializer
+  attributes :id, :username
+  has_many :trips
+end
+</code></pre></div></div>
+
+<h3 id="explicit-serializer">Explicit Serializer</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Trip User Serializer
+
+class TripUserSerializer &lt; ActiveModel::Serializer
+  attributes :username
+end
+</code></pre></div></div>
+
+<h2 id="custom-api-data">Custom API Data</h2>
+<p>Create a new function in your model that returns data.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># User Model
+
+class User &lt; ApplicationRecord
+  has_many :trips
+
+  def trip_count
+    self.trips.count
+  end
+end
+</code></pre></div></div>
+
+<p>Add the name of the new method to your attributes.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Trip User Serializer
+
+class TripUserSerializer &lt; ActiveModel::Serializer
+  attributes :username, :trip_count
+end
+</code></pre></div></div>
+
+<p>Another way is to create the new function in the serializer itself.</p>
+
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code># Trip User Serializer
+
+class TripUserSerializer &lt; ActiveModel::Serializer
+  attributes :username, :trip_count
+	
+  def trip_count
+    object.trips.count
+  end
+end
+</code></pre></div></div>
+
+<p>And that’s it! Super simple.</p>
+
+<h2 id="conclusion">Conclusion</h2>
+<p>This is a great way to control exactly what info each API serves and how it can be accessed. API calls are minimized and streamlined.</p>
+
+:ET
